@@ -97,31 +97,28 @@ export default function Dormir() {
     }
   }, [roomsData]);
 
-  // Effet pour détecter l'état du menu - version simplifiée
+  // Une meilleure façon de surveiller les changements du menu
   useEffect(() => {
-    const handleMenuToggle = () => {
-      // On attend un peu pour laisser le temps à l'animation de se déclencher
-      setTimeout(() => {
-        const menuElement = document.querySelector('header');
-        if (menuElement) {
-          setMenuOpen(menuElement.classList.contains('menu-open'));
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const header = document.querySelector('header');
+          if (header) {
+            setMenuOpen(header.classList.contains('menu-open'));
+          }
         }
-      }, 50);
-    };
+      });
+    });
 
-    // Sélectionner le bouton de menu
-    const menuButton = document.querySelector('.menu-button');
-    if (menuButton) {
-      menuButton.addEventListener('click', handleMenuToggle);
+    const header = document.querySelector('header');
+    if (header) {
+      observer.observe(header, { attributes: true });
+      // Vérification initiale
+      setMenuOpen(header.classList.contains('menu-open'));
     }
 
-    // Vérification initiale
-    handleMenuToggle();
-
     return () => {
-      if (menuButton) {
-        menuButton.removeEventListener('click', handleMenuToggle);
-      }
+      observer.disconnect();
     };
   }, []);
 

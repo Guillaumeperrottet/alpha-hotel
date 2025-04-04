@@ -33,7 +33,7 @@ export default function Header() {
     >
       <div className="w-full px-4 flex justify-between items-center py-4">
         <button
-          className="md:hidden order-1 mr-4"
+          className="md:hidden order-1 mr-4 menu-button"
           onClick={toggleMenu}
           aria-expanded={menuOpen}
           aria-label="Menu principal"
@@ -58,7 +58,7 @@ export default function Header() {
         </button>
 
         <button
-          className="hidden md:flex items-center order-1 text-gray-800 hover:text-gray-600"
+          className="hidden md:flex items-center order-1 text-gray-800 hover:text-gray-600 menu-button"
           onClick={toggleMenu}
           aria-expanded={menuOpen}
           aria-label="Menu principal"
