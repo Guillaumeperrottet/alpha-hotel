@@ -18,7 +18,7 @@ export default function Footer() {
               <div>Travel Awards</div>
               <div className="mt-2">
                 <div className="text-sm">Powered by</div>
-                <div>Lodges de Camargue</div>
+                <div>Hôtel Alpha</div>
               </div>
             </div>
             <div className="bg-blue-600 p-2 rounded text-white">
