@@ -7,8 +7,8 @@ export default function HeroSection() {
 return(
     <div className="relative w-full h-[60vh]">
       <Image
-        src="/images/rooms/hero-bedroom.jpg"
-        alt="Vue panoramique de nos chambres d'hôtel luxueuses"
+        src="/images/background_dormir.jpg"
+        alt="image-background"
         fill
         priority
         style={{ objectFit: "cover" }}

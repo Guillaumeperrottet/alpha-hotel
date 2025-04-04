@@ -1,57 +1,98 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-export default function RoomDisplay({ roomData }) {
-  const { title, image, description, features, price, imageOnLeft } = roomData;
-
-  const imageBlock = (
-    <div className="relative h-[500px]">
-      <Image
-        src={image}
-        alt={`Vue de ${title.toLowerCase()}`}
-        fill
-        style={{ objectFit: "cover" }}
-        className="rounded-lg"
-        quality={85}
-      />
-    </div>
-  );
-
-  const contentBlock = (
-    <div>
-      <h3 className="text-3xl font-light mb-6">{title}</h3>
-      <p className="text-gray-700 mb-6">{description}</p>
-      <ul className="mb-8 space-y-2">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <span className="mr-2">•</span>
-            {feature}
-          </li>
-        ))}
-      </ul>
-      <p className="text-xl font-semibold mb-6">{price}</p>
-      <button
-        className="bg-amber-800 hover:bg-amber-900 text-white py-3 px-8 rounded-lg transition"
-        aria-label={`Réserver ${title.toLowerCase()}`}
-      >
-        RÉSERVER
-      </button>
-    </div>
-  );
+export default function RoomDisplay({ roomData, isVisible = true }) {
+  const {
+    title,
+    subtitle,
+    image,
+    description,
+    features,
+    capacity,
+    price
+  } = roomData;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      {imageOnLeft ? (
-        <>
-          {imageBlock}
-          {contentBlock}
-        </>
-      ) : (
-        <>
-          <div className="order-2 lg:order-1">{contentBlock}</div>
-          <div className="order-1 lg:order-2">{imageBlock}</div>
-        </>
-      )}
+    <div
+      className={`max-w-7xl mx-auto px-4 py-12 transition-opacity duration-500 ease-in-out ${
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
+      {/* En-tête avec titre et capacité */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div>
+          <h2 className="text-5xl font-bold mb-2">{title}</h2>
+          <p className="text-xl italic font-light">{subtitle}</p>
+        </div>
+        <div className="flex items-center mt-4 md:mt-0">
+          <div className="flex">
+            {/* Icônes de personnes */}
+            {Array(capacity).fill().map((_, i) => (
+              <svg key={i} className="w-8 h-8 mx-1" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            ))}
+          </div>
+          <span className="ml-2">{capacity} personnes</span>
+        </div>
+      </div>
+
+      {/* Description principale */}
+      <div className="mb-12">
+        <p className="text-gray-700">{description}</p>
+      </div>
+
+      {/* Titre "Détails" avec style manuscrit */}
+      <h3 className="text-4xl font-light italic mb-8">Détails</h3>
+
+      {/* Caractéristiques et image */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Liste des caractéristiques avec icônes */}
+        <div className="space-y-6">
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-center">
+              <div className="bg-amber-100 rounded-full p-3 mr-4">
+                <svg className="w-6 h-6 text-amber-800" viewBox="0 0 24 24" fill="currentColor">
+                  <path d={feature.iconPath || "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8-8-3.59 8-8 8z"} />
+                </svg>
+              </div>
+              <span>{feature.text}</span>
+            </div>
+          ))}
+
+          {/* Bouton de réservation */}
+          <div className="mt-12">
+            <button
+              className="bg-amber-800 hover:bg-amber-900 text-white py-3 px-8 rounded-lg transition mt-6"
+              aria-label={`Réserver ${title.toLowerCase()}`}
+            >
+              RÉSERVER
+            </button>
+            {price && <span className="block mt-3 text-xl font-semibold">{price}</span>}
+          </div>
+        </div>
+
+        {/* Image de la chambre */}
+        <div className="relative aspect-[4/3] w-full">
+          <Image
+            src={image}
+            alt={`Vue de ${title.toLowerCase()}`}
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-lg"
+            quality={85}
+          />
+        </div>
+      </div>
+
+      {/* Cercle "Réserver dès maintenant" (optionnel) */}
+      <div className="hidden md:block relative h-32 w-32 mt-8 ml-auto">
+        <div className="absolute inset-0 rounded-full border-2 border-amber-800 flex items-center justify-center animate-spin-slow">
+          <span className="text-xs uppercase tracking-widest text-amber-800" style={{ transform: 'rotate(30deg)' }}>
+            Réserver dès maintenant
+          </span>
+        </div>
+      </div>
     </div>
   );
-};
+}
