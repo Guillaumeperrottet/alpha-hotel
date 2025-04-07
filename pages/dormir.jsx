@@ -26,7 +26,6 @@ export default function Dormir() {
         "Lit king-size ou deux lits simples",
         "Petit-déjeuner inclus"
       ],
-      price: "À partir de 120€ / nuit",
       imageOnLeft: true
     },
     double: {
@@ -40,7 +39,6 @@ export default function Dormir() {
         "Lit king-size et canapé convertible",
         "Terrasse privative"
       ],
-      price: "À partir de 180€ / nuit",
       imageOnLeft: false
     },
     superieur: {
@@ -55,7 +53,6 @@ export default function Dormir() {
         "Grande terrasse avec vue panoramique",
         "Bain à remous privatif"
       ],
-      price: "À partir de 250€ / nuit",
       imageOnLeft: true
     },
     omega: {
@@ -70,7 +67,6 @@ export default function Dormir() {
         "Deux salles de bains complètes",
         "Terrasse aménagée avec vue panoramique"
       ],
-      price: "À partir de 320€ / nuit",
       imageOnLeft: false
     }
   };

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [currentLang, setCurrentLang] = useState('FR');
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,14 +110,86 @@ export default function Header() {
         >
           <nav className="text-center space-y-4 text-lg py-16 w-full">
             <ul className="flex flex-col space-y-4">
-              <li><Link href="/" className="hover:text-gray-600 transition-colors duration-200">Accueil</Link></li>
-              <li><Link href="/dormir" className="hover:text-gray-600 transition-colors duration-200">Dormir</Link></li>
-              <li><Link href="/le-spot" className="hover:text-gray-600 transition-colors duration-200">Le Spot</Link></li>
-              <li><Link href="/activites" className="hover:text-gray-600 transition-colors duration-200">Idées d'activités</Link></li>
-              <li><Link href="/engagements" className="hover:text-gray-600 transition-colors duration-200">Nos engagements</Link></li>
-              <li><Link href="/groupes" className="hover:text-gray-600 transition-colors duration-200">Corpo et groupes</Link></li>
-              <li><Link href="/galerie" className="hover:text-gray-600 transition-colors duration-200">Galerie photos</Link></li>
-              <li><Link href="/contact" className="hover:text-gray-600 transition-colors duration-200">Contact & Accès</Link></li>
+              <li>
+                <Link
+                  href="/"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Accueil
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dormir"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/dormir' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Dormir
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/le-spot"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/le-spot' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Le Spot
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/activites"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/activites' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Idées d'activités
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/engagements"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/engagements' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Nos engagements
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/groupes"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/groupes' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Corpo et groupes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/galerie"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/galerie' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Galerie photos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className={`transition-colors duration-200 ${
+                    router.pathname === '/contact' ? 'text-gray-400 cursor-default' : 'hover:text-gray-600'
+                  }`}
+                >
+                  Contact & Accès
+                </Link>
+              </li>
             </ul>
           </nav>
           <div className="mb-8 text-center">

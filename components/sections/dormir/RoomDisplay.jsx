@@ -84,15 +84,6 @@ export default function RoomDisplay({ roomData, isVisible = true }) {
           />
         </div>
       </div>
-
-      {/* Cercle "Réserver dès maintenant" (optionnel) */}
-      <div className="hidden md:block relative h-32 w-32 mt-8 ml-auto">
-        <div className="absolute inset-0 rounded-full border-2 border-amber-800 flex items-center justify-center animate-spin-slow">
-          <span className="text-xs uppercase tracking-widest text-amber-800" style={{ transform: 'rotate(30deg)' }}>
-            Réserver dès maintenant
-          </span>
-        </div>
-      </div>
     </div>
   );
 }
