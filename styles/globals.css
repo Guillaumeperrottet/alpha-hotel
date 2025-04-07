@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'swiper/swiper-bundle.css';
 
 
 .h-6 {
@@ -14,4 +15,31 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari et Opera */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff; /* Couleur des flèches */
+  font-size: 2rem;
+  z-index: 10;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 2rem;
+  color: #ffffff; /* Couleur des flèches */
+}
+
+.swiper-pagination-bullet {
+  background-color: #ffffff; /* Couleur des bullets */
+  width: 12px; /* Largeur des bullets */
+  height: 12px; /* Hauteur des bullets */
+  opacity: 0.6; /* Transparence des bullets inactives */
+  transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff; /* Couleur des bullets actives */
+  opacity: 1; /* Opacité des bullets actives */
+  transform: scale(1.2); /* Agrandissement des bullets actives */
 }

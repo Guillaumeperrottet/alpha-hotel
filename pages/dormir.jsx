@@ -5,7 +5,6 @@ import HeroSection from '../components/sections/dormir/HeroSection';
 import RoomTabs from '../components/ui/RoomTabs';
 import RoomDisplay from '../components/sections/dormir/RoomDisplay';
 import CtaSection from '../components/sections/dormir/CtaSection';
-import RoomNavigation from '../components/sections/dormir/RoomNavigation';
 
 export default function Dormir() {
   // États
@@ -18,7 +17,10 @@ export default function Dormir() {
     simple: {
       id: "simple",
       title: "Chambre simple",
-      image: "/images/simple-room.jpg",
+      image: [
+        "/images/simple-room.jpg",
+        "/images/simple-room2.jpg",
+        "/images/simple-room3.jpg"],
       description: "Nos chambres simple offrent un espace chaleureux et confortable de 25m², dotées d'une décoration soignée et d'une vue sur le jardin. Chaque chambre dispose d'une salle de bain privative avec douche à l'italienne.",
       features: [
         "Surface: 25m²",
@@ -31,7 +33,9 @@ export default function Dormir() {
     double: {
       id: "double",
       title: "Suite double",
-      image: "/images/chambre-double.jpg",
+      image: ["/images/chambre-double.jpg",
+              "/images/chambre-double2.jpg",
+              "/images/chambre-double3.jpg"],
       description: "Nos suites double de 40m² offrent un espace de vie séparé et une terrasse privative donnant sur notre jardin méditerranéen. Profitez d'un séjour spacieux et élégant, idéal pour les séjours prolongés.",
       features: [
         "Surface: 40m²",
@@ -44,7 +48,9 @@ export default function Dormir() {
     superieur: {
       id: "superieur",
       title: "Suite supérieur",
-      image: "/images/chambre-superieur.jpg",
+      image: ["/images/chambre-superieur.jpg",
+              "/images/chambre-superieur2.jpg",
+              "/images/chambre-superieur3.jpg"],
       description: "Notre suite superieur de 60m² offre le summum du luxe avec un salon séparé, une grande terrasse privative et une vue panoramique. Une expérience d'exception pour votre séjour, avec des prestations haut de gamme.",
       features: [
         "Surface: 60m²",
@@ -58,7 +64,9 @@ export default function Dormir() {
     omega: {
       id: "omega",
       title: "Suite omega",
-      image: "/images/suite-omega.jpg",
+      image: ["/images/suite-omega.jpg",
+              "/images/suite-omega2.jpg",
+              "/images/suite-omega3.jpg"],
       description: "Notre suite omega de 75m² est parfaite pour les familles ou groupes d'amis. Avec deux chambres séparées, un salon commun et une grande terrasse, elle offre tout l'espace et le confort nécessaires pour un séjour en groupe.",
       features: [
         "Surface: 75m²",
@@ -82,6 +90,11 @@ export default function Dormir() {
 
   // Fonction pour changer la chambre active
   const changeRoom = (roomId) => {
+    setIsTransitioning(true); // Début de la transition
+    setTimeout(() => {
+      setActiveRoom(roomId); // Change la chambre après un délai
+      setIsTransitioning(false); // Fin de la transition
+    }, 300); // Durée de la transition (en ms)
     setActiveRoom(roomId);
     window.history.pushState({}, '', `?room=${roomId}`);
   };
@@ -138,7 +151,9 @@ export default function Dormir() {
 
       <div className="container mx-auto px-4 pb-16">
         <div className="mb-24">
-          <RoomDisplay roomData={roomsData[activeRoom]} />
+          <RoomDisplay roomData={roomsData[activeRoom]}
+                        isVisible={!isTransitioning}
+          />
         </div>
       </div>
 

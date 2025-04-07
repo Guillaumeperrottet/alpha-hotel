@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
 
 export default function RoomDisplay({ roomData, isVisible = true }) {
   const {
@@ -74,14 +77,28 @@ export default function RoomDisplay({ roomData, isVisible = true }) {
 
         {/* Image de la chambre */}
         <div className="relative aspect-[4/3] w-full">
-          <Image
-            src={image}
-            alt={`Vue de ${title.toLowerCase()}`}
-            fill
-            style={{ objectFit: "cover" }}
-            className="rounded-lg"
-            quality={85}
-          />
+          {/* Carrousel d'images */}
+          <div className="mb-12">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation={true}
+              pagination={{ clickable: true,}}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              loop={true}
+              spaceBetween={10}
+              slidesPerView={1}
+            >
+              {image.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1} de ${title}`}
+                    className="rounded-lg w-full h-[400px] object-cover"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </div>
