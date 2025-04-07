@@ -1,3 +1,4 @@
+// Composant Footer : Affiche le pied de page du site avec des badges, des informations et des liens vers les réseaux sociaux
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -6,7 +7,7 @@ export default function Footer() {
     <footer className="bg-black text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
-          {/* Awards / Badges */}
+          {/* Section des badges et récompenses */}
           <div className="mb-6 md:mb-0 flex space-x-4">
             <div className="bg-white p-2 rounded">
               {/* Placeholder pour les images de badges */}
@@ -27,7 +28,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Informations */}
+          {/* Section des informations importantes */}
           <div className="mb-6 md:mb-0">
             <h3 className="text-lg font-semibold mb-3">Informations</h3>
             <ul className="space-y-2">
@@ -37,7 +38,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Nous suivre */}
+          {/* Section des liens vers les réseaux sociaux */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Nous suivre</h3>
             <div className="flex space-x-4">

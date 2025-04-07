@@ -1,3 +1,4 @@
+// Composant RoomTabs : Affiche les onglets de navigation pour les différentes chambres
 import React from 'react';
 
 export default function RoomTabs ({ activeRoom, changeRoom, menuOpen, roomOptions }){
@@ -9,7 +10,7 @@ export default function RoomTabs ({ activeRoom, changeRoom, menuOpen, roomOption
       aria-label="Navigation des chambres"
     >
       <div className="container mx-auto px-4">
-        {/* Version mobile avec défilement horizontal */}
+        {/* Version mobile */}
         <div className="flex overflow-x-auto scrollbar-hide md:hidden">
           {roomOptions.map((room) => (
             <button
@@ -27,7 +28,7 @@ export default function RoomTabs ({ activeRoom, changeRoom, menuOpen, roomOption
           ))}
         </div>
 
-        {/* Version desktop avec grille */}
+        {/* Version desktop */}
         <div className="hidden md:grid md:grid-cols-4 md:text-center">
           {roomOptions.map((room) => (
             <button

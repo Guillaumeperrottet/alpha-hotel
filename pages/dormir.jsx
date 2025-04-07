@@ -5,14 +5,14 @@ import HeroSection from '../components/sections/dormir/HeroSection';
 import RoomTabs from '../components/ui/RoomTabs';
 import RoomDisplay from '../components/sections/dormir/RoomDisplay';
 import CtaSection from '../components/sections/dormir/CtaSection';
+import RoomTransition from '../components/ui/RoomTransition';
 
 export default function Dormir() {
   // États
   const [activeRoom, setActiveRoom] = useState('simple');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Données des chambres pour faciliter la maintenance
+  // Données statiques des chambres utilisées pour afficher les informations et les images
   const roomsData = {
     simple: {
       id: "simple",
@@ -78,8 +78,8 @@ export default function Dormir() {
       imageOnLeft: false
     }
   };
-
-  // Convertir roomsData en tableau pour la navigation - avec useMemo pour optimiser
+  // Convertir roomsData en tableau pour la navigation
+  // Utilisation de useMemo pour optimiser la génération des options de navigation des chambres
   const roomOptions = useMemo(() =>
     Object.values(roomsData).map(room => ({
       id: room.id || Object.keys(roomsData).find(key => roomsData[key] === room),
@@ -88,18 +88,7 @@ export default function Dormir() {
     [roomsData]
   );
 
-  // Fonction pour changer la chambre active
-  const changeRoom = (roomId) => {
-    setIsTransitioning(true); // Début de la transition
-    setTimeout(() => {
-      setActiveRoom(roomId); // Change la chambre après un délai
-      setIsTransitioning(false); // Fin de la transition
-    }, 300); // Durée de la transition (en ms)
-    setActiveRoom(roomId);
-    window.history.pushState({}, '', `?room=${roomId}`);
-  };
-
-  // Effet pour récupérer le paramètre d'URL au chargement
+  // Récupère le paramètre 'room' de l'URL pour définir la chambre active au chargement
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const roomParam = params.get('room');
@@ -108,7 +97,16 @@ export default function Dormir() {
     }
   }, [roomsData]);
 
-  // Une meilleure façon de surveiller les changements du menu
+  // Fonction pour changer la chambre active
+  const changeRoom = (roomId) => {
+    if (roomId === activeRoom) return;
+
+    setActiveRoom(roomId);
+    window.history.pushState({}, '', `?room=${roomId}`);
+  };
+
+
+  // Observe les changements de classe sur le header pour détecter si le menu est ouvert
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -151,9 +149,11 @@ export default function Dormir() {
 
       <div className="container mx-auto px-4 pb-16">
         <div className="mb-24">
-          <RoomDisplay roomData={roomsData[activeRoom]}
-                        isVisible={!isTransitioning}
-          />
+          <RoomTransition
+            currentRoom={roomsData[activeRoom]}
+          >
+            <RoomDisplay />
+          </RoomTransition>
         </div>
       </div>
 

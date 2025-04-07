@@ -1,3 +1,5 @@
+// Composant Header : Affiche l'en-tête du site avec un menu responsive, un logo, des liens de navigation, et une gestion de la langue
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,6 +12,7 @@ export default function Header() {
   const router = useRouter();
 
   useEffect(() => {
+    // Ajoute un effet de "scrolled" lorsque l'utilisateur défile vers le bas
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
@@ -18,6 +21,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Ouvre ou ferme le menu mobile
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -29,6 +33,7 @@ export default function Header() {
 
   return (
     <header
+      /* Le header devient blanc avec une ombre lorsque l'utilisateur défile ou ouvre le menu */
       className={`fixed top-0 left-0 w-full z-20 transition-all duration-300 ${
         scrolled || menuOpen ? 'bg-white shadow-md' : 'bg-transparent'
       } ${menuOpen ? 'menu-open' : ''}`}
@@ -85,6 +90,7 @@ export default function Header() {
           {menuOpen ? 'Fermer' : 'Menu'}
         </button>
 
+        {/* Logo de l'hôtel */}
         <div className="text-lg font-bold absolute left-1/2 transform -translate-x-1/2">
           <Link href="/">
             {<Image src="/images/logo.png" alt="Alpha-Hotel Logo" width={40} height={40} />}
@@ -100,7 +106,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Menu de navigation avec transition améliorée */}
+        {/* Menu de navigation avec transition pour l'ouverture/fermeture */}
         <div
           className={`fixed left-0 right-0 bottom-0 top-[53px] bg-white z-10 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
             menuOpen

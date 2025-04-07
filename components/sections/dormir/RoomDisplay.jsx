@@ -77,7 +77,8 @@ export default function RoomDisplay({ roomData, isVisible = true }) {
 
         {/* Image de la chambre */}
         <div className="relative aspect-[4/3] w-full">
-          {/* Carrousel d'images */}
+          {/* Utilisation de Swiper pour afficher un carrousel d'images des chambres */}
+          {/* Navigation activée et pagination cliquable */}
           <div className="mb-12">
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
